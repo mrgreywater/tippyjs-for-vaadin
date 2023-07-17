@@ -3,18 +3,18 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.vaadin.addons.mygroup</groupId>
-    <artifactId>axa-input-text</artifactId>
+    <groupId>org.vaadin.addons.mrgreywater</groupId>
+    <artifactId>tippyjs-for-vaadin</artifactId>
 
     <!-- Add-on version number. Snapshot is good for development,
     but when publishing, make sure to use semantic version number like '1.0.0'.
     See https://semver.org/ -->
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0a</version>
 
     <!-- Change this. The name is used when you publish to Vaadin Directory.
     Make sure to use a unique name by first searching at https://vaadin.com/directory -->
-    <name>AXA Input Text</name>
-    <description>Integration of axa-input-text for Vaadin platform</description>
+    <name>Tippy.js for Vaadin</name>
+    <description>Integration Tippy.js for Vaadin platform</description>
 
     <properties>
 

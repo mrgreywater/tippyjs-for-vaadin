@@ -1,14 +1,12 @@
-package org.vaadin.addons.mygroup;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+package org.vaadin.addons.mrgreywater;
 
 import com.vaadin.testbench.ScreenshotOnFailureRule;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.parallel.ParallelTest;
+import org.junit.Before;
+import org.junit.Rule;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
  * Base class for ITs

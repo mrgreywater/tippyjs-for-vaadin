@@ -1,0 +1,5 @@
+@import url("theme/lumo.css");
+
+.tippy-content {
+    white-space: pre-line;
+}
