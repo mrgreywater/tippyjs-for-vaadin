@@ -3,3 +3,15 @@
 .tippy-content {
     white-space: pre-line;
 }
+
+tippyjs-for-vaadin-lifecycle {
+    display: none;
+}
+
+tippyjs-for-vaadin {
+    display: none;
+}
+
+.tippy-content tippyjs-for-vaadin {
+    display: initial;
+}

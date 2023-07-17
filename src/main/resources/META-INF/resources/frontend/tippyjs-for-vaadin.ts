@@ -1,6 +1,6 @@
 import {html, LitElement, PropertyValueMap} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import tippy from 'tippy.js';
+import tippy, {animateFill, roundArrow} from 'tippy.js';
 import {TippyJsForVaadinLifecyle} from "./tippyjs-for-vaadin-lifecycle";
 
 /** Custom elemnt displaying current time clock.
@@ -13,7 +13,14 @@ export class TippyjsForVaadin extends LitElement {
 
     @property({type: String}) placement = "top";
 
-    @property() arrow = true;
+    @property({type: String}) animation = "fade";
+
+    @property({type: String}) theme = "lumo";
+
+    @property() arrow: SVGElement | String | boolean = true;
+
+    @property({type: Boolean}) enableAnimateFill = false;
+    @property({type: Boolean}) inertia = false;
 
     @property({type: Object}) lifecycle: TippyJsForVaadinLifecyle = null;
 
@@ -54,13 +61,21 @@ export class TippyjsForVaadin extends LitElement {
 
     _createTippy(parentElement: HTMLElement) {
         if (!this.tippy) {
-            this.tippy = tippy(parentElement, {
-                theme: 'lumo',
-                allowHTML: true,
+            let props = {
+                plugins: [],
                 content: this,
+                theme: this.theme,
+                allowHTML: true,
+                animation: this.animation,
                 placement: this.placement,
-                arrow: true,
-            });
+                inertia: this.inertia,
+                arrow: this.arrow,
+            };
+            if (this.enableAnimateFill) {
+                props.plugins.push(animateFill);
+                props["animateFill"] = true;
+            }
+            this.tippy = tippy(parentElement, props);
         } else {
             this.tippy.setContent(null);
             this.tippy.setContent(this);
@@ -74,16 +89,53 @@ export class TippyjsForVaadin extends LitElement {
         return html`<slot></slot>`;
     }
 
-    shouldUpdate(changedProperties: PropertyValueMap<any>) {
-        if (changedProperties.has("placement")) {
+    getRoundArrow() {
+        return roundArrow;
+    }
+
+    setArrow(arrow: SVGElement | String | boolean) {
+        console.log("vtip: setting arrow", arrow);
+        this.arrow = arrow;
+        if (this.tippy) {
             this.tippy.setProps({
-                placement: this.placement
+                arrow: this.arrow,
             })
         }
-        if (changedProperties.has("arrow")) {
-            this.tippy.setProps({
-                arrow: this.arrow
-            })
+    }
+
+    shouldUpdate(changedProperties: PropertyValueMap<any>) {
+        if (this.tippy) {
+            if (changedProperties.has("placement")) {
+                this.tippy.setProps({
+                    placement: this.placement
+                })
+            }
+            if (changedProperties.has("animation")) {
+                this.tippy.setProps({
+                    animation: this.animation
+                })
+            }
+            if (changedProperties.has("arrow")) {
+                this.tippy.setProps({
+                    arrow: this.arrow
+                })
+            }
+            if (changedProperties.has("enableAnimateFill")) {
+                this.tippy.setProps({
+                    plugins: [animateFill],
+                    animateFill: this.enableAnimateFill,
+                })
+            }
+            if (changedProperties.has("theme")) {
+                this.tippy.setProps({
+                    theme: this.theme,
+                })
+            }
+            if (changedProperties.has("inertia")) {
+                this.tippy.setProps({
+                    inertia: this.inertia,
+                })
+            }
         }
         return super.shouldUpdate(changedProperties);
     }

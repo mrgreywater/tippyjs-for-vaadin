@@ -60,6 +60,63 @@ public class View extends VerticalLayout {
             add(hlayout);
         }
         {
+            // Animation
+            var vLayout = new VerticalLayout();
+            vLayout.setWidthFull();
+            var animations = Tippy.Animation.values();
+            for (int j = 0; j < animations.length / 3; j++) {
+                var hLayout = new HorizontalLayout();
+                hLayout.setWidthFull();
+                vLayout.add(hLayout);
+                for (int i = 0; i < 3; i++) {
+                    var animation = animations[j * 3 + i];
+                    var button = new Button(animation.getProp());
+                    button.setWidth("200px");
+                    var tippy = Tippy.createTooltipFor(button);
+                    tippy.setText("Tooltip");
+                    tippy.setAnimation(animation);
+                    hLayout.add(button);
+                }
+            }
+            add(vLayout);
+        }
+        {
+            // Material filling effect
+            var button = new Button("AnimateFill");
+            var tooltip = Tippy.createTooltipFor(button);
+            tooltip.setText("I'm a Tippy tooltip!");
+            tooltip.setTheme(Tippy.Theme.MATERIAL);
+            tooltip.setAnimateFill(true);
+            add(button);
+        }
+        {
+            // Inertia effect
+            var button = new Button("Inertia");
+            var tooltip = Tippy.createTooltipFor(button);
+            tooltip.setText("I'm a Tippy tooltip!");
+            tooltip.setTheme(Tippy.Theme.MATERIAL);
+            tooltip.setInertia(true);
+            add(button);
+        }
+        {
+            // Round Arrow
+            var button = new Button("Round Arrow");
+            var tooltip = Tippy.createTooltipFor(button);
+            tooltip.setText("I'm a Tippy tooltip!");
+            tooltip.setTheme(Tippy.Theme.MATERIAL);
+            tooltip.setRoundArrow(true);
+            add(button);
+        }
+        {
+            // Disable Arrow
+            var button = new Button("Disable Arrow");
+            var tooltip = Tippy.createTooltipFor(button);
+            tooltip.setText("I'm a Tippy tooltip!");
+            tooltip.setTheme(Tippy.Theme.MATERIAL);
+            tooltip.setArrow(false);
+            add(button);
+        }
+        {
             var switchThemeVariantButton = new Button("Switch to dark theme");
             var tooltip = Tippy.createTooltipFor(switchThemeVariantButton);
             tooltip.setText("Switch to " + (dark ? "light" : "dark") + " theme.");
@@ -114,7 +171,7 @@ public class View extends VerticalLayout {
 
         grid.setItems(person);
         grid.addColumn(LitRenderer
-                .<Person>of("<label><tippyjs-for-vaadin><b>${item.name}</b></tippyjs-for-vaadin><b>${item.name}</b></label>")
+                .<Person>of("<label><tippyjs-for-vaadin>${item.name}</tippyjs-for-vaadin>${item.name}</label>")
                 .withProperty("name", person1 -> String.valueOf(person1.i))
         ).setHeader("LitRenderer");
 
